@@ -1,13 +1,13 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Laravel 7 CRUD Example from scratch - ItSolutionStuff.com</h2>
+                <h2>Tạo đơn vị</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('donvi.create') }}"> Create New Product</a>
+                <a class="btn btn-success" href="{{ route('donvi.create') }}"> Thêm Đơn vị</a>
             </div>
         </div>
     </div>
