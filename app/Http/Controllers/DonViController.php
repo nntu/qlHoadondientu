@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DonVi;
 use Illuminate\Http\Request;
-
+use DataTables;
 class DonViController extends Controller
 {
     /**
@@ -15,12 +15,29 @@ class DonViController extends Controller
     public function index()
     {
         //
-        $donvis = DonVi::latest()->paginate(5);
-
-        return view('donvi.index',compact('donvis'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        //
+        $dsdonvi = DonVi::all();
+        return view('donvi.index')->with('dsdonvi', $dsdonvi);
     }
+    public function getdatatable(Request $request)
+    {
+        if ($request->ajax()) {
 
+            $dsdonvi = DonVi::all();
+            return Datatables::of($dsdonvi)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                   // if (\Session::get('donvi_edit'))
+                        $btn = '<a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+                  //  if (\Session::get('donvi_delete'))
+                        $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -41,6 +58,15 @@ class DonViController extends Controller
     public function store(Request $request)
     {
         //
+
+        $request->validate([
+            'MST' => 'required',
+            'TenDonVi' => 'required',
+        ]);
+
+        DonVi::create($request->all());
+
+        return redirect()->route('donvi.index')->with('success','Post created successfully.');
     }
 
     /**

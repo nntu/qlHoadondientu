@@ -1,52 +1,66 @@
 @extends('adminlte::page')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Tạo đơn vị</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('donvi.create') }}"> Thêm Đơn vị</a>
-            </div>
-        </div>
+
+<div style="margin-bottom: 10px;" class="row">
+    <div class="col-lg-12">
+        <a class="btn btn-success" href="{{ route("donvi.create") }}">
+            Thêm Đơn vị
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+       Danh sach Đơn vị
     </div>
 
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tbdonvi" class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th width="10">
+
+                        </th>
+                        <th>
+                            Mã số Thuế
+                        </th>
+                        <th>
+                            Tên Đơn vị
+                        </th>
+
+                        <th>
+                            &nbsp;
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
         </div>
-    @endif
+    </div>
+</div>
+@section('adminlte_js')
+@parent
+<script type="text/javascript">
+  $(function () {
 
-    <table class="table table-bordered">
-        <tr>
-            <th>MST</th>
-            <th>Tên Đơn vị</th>
-            <th>Details</th>
-            <th width="280px">Action</th>
-        </tr>
-        @foreach ($donvis as $donvi)
-        <tr>
-            <td>{{ ++$i }}</td>
-            <td>{{ $donvi->MST }}</td>
-            <td>{{ $donvi->TenDonVi }}</td>
-            <td>
-                <form action="{{ route('donvi.destroy',$donvi->id) }}" method="POST">
+    var table = $('#tbdonvi').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('donvi.getdatatable') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'MST', name: 'MST'},
+            {data: 'TenDonVi', name: 'TenDonVi'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
 
-                    <a class="btn btn-info" href="{{ route('donvi.show',$donvi->id) }}">Show</a>
+  });
+</script>
 
-                    <a class="btn btn-primary" href="{{ route('donvi.edit',$donvi->id) }}">Edit</a>
-
-                    @csrf
-                    @method('DELETE')
-
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </table>
-
-    {!! $donvis->links() !!}
-
+@endsection
 @endsection
