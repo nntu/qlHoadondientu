@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\DonVi;
 use Illuminate\Http\Request;
+use App\Http\Requests\DonViPostRequest;
+
 use DataTables;
+
 class DonViController extends Controller
 {
     /**
@@ -55,18 +58,16 @@ class DonViController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DonViPostRequest $request)
     {
         //
-
-        $request->validate([
-            'MST' => 'required',
-            'TenDonVi' => 'required',
-        ]);
-
-        DonVi::create($request->all());
-
-        return redirect()->route('donvi.index')->with('success','Post created successfully.');
+        $product = DonVi::create($request->all());
+        if ($product) {
+            alert()->success('Đơn vị đã được tạo', 'Successfully'); // hoặc có thể dùng alert('Post Created','Successfully', 'success');
+        } else {
+            alert()->error('Post Created', 'Something went wrong!'); // hoặc có thể dùng alert('Post Created','Something went wrong!', 'error');
+        }
+        return redirect()->route('donvi.index');
     }
 
     /**

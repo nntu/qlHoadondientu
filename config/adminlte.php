@@ -251,9 +251,37 @@ return [
             'text'        => 'Đơn vị',
             'url'         => 'donvi',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
             'label_color' => 'success',
+            'submenu' => [
+                [
+                    'text' => 'Thêm Đơn Vị',
+                    'url'  => 'donvi/create',
+                ],
+                [
+                    'text' => 'Ds Đơn Vị',
+                    'url'  => 'donvi',
+                ],
+            ],
         ],
+
+        ['header' => 'Hoá Đơn'],
+        [
+            'text'        => 'Hoá Đơn',
+            'url'         => 'donvi',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+            'submenu' => [
+                [
+                    'text' => 'Thêm Hoá Đơn',
+                    'url'  => 'donvi/create',
+                ],
+                [
+                    'text' => 'Ds Đơn Vị',
+                    'url'  => 'donvi',
+                ],
+            ],
+        ],
+
 
         ['header' => 'account_settings'],
         [
