@@ -12,8 +12,6 @@ class donviTableSeeder extends Seeder
     public function run()
     {
         //
-
-
         DB::table('donvi')->truncate();
         DB::table('donvi')->insert([
             ['MST' => '1801201221', 'tendonvi' => 'DNTN TU TRUONG'],
