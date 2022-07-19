@@ -17,7 +17,6 @@ class CreateHddientuTable extends Migration
 
             $table->increments('id');
             $table->string('MST');
-            $table->string('mauso');
             $table->string('kyhieu');
             $table->string('sohoadon');
             $table->decimal('sotien', 10, 2);
@@ -26,7 +25,9 @@ class CreateHddientuTable extends Migration
             $table->date('ngayhoadon');
             $table->string('nguoithanhtoan');
             $table->date('ngaythanhtoan');
+            $table->boolean('dathanhtoan');
             $table->timestamps();
+            $table->index(['MST']);
         });
     }
 

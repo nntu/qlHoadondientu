@@ -22,4 +22,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('donvi/getdatatable', 'DonViController@getdatatable')->name('donvi.getdatatable');
 Route::resource('donvi','DonViController');
+
+
+Route::get('hddientu/getdatatable', 'HDDienTuController@getdatatable')->name('hddientu.getdatatable');
 Route::resource('hddientu','HDDienTuController');
+
+

@@ -208,7 +208,7 @@ return [
     |
     */
 
-    'enabled_laravel_mix' => false,
+    'enabled_laravel_mix' => true,
     'laravel_mix_css_path' => 'css/app.css',
     'laravel_mix_js_path' => 'js/app.js',
 
@@ -267,17 +267,17 @@ return [
         ['header' => 'Hoá Đơn'],
         [
             'text'        => 'Hoá Đơn',
-            'url'         => 'donvi',
+            'url'         => 'hddientu',
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
             'submenu' => [
                 [
                     'text' => 'Thêm Hoá Đơn',
-                    'url'  => 'donvi/create',
+                    'url'  => 'hddientu/create',
                 ],
                 [
-                    'text' => 'Ds Đơn Vị',
-                    'url'  => 'donvi',
+                    'text' => 'Ds Hóa đơn',
+                    'url'  => 'hddientu',
                 ],
             ],
         ],
